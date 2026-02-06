@@ -9,19 +9,31 @@ IMAGE_NAME = "hackerlab:latest"        # esempio: python:3.10
 PORT_RANGE = (10000, 19999)
 CONTAINER_PREFIX = "hlab_"
 
+
 def get_free_port():
-    """Cerca una porta libera nel range."""
-    used_ports = [
-        int(port)
-        for c in client.containers.list()
-        for port in c.attrs["NetworkSettings"]["Ports"].keys()
-        if port is not None
-    ]
-    
+    used_ports = set()
+
+    for c in client.containers.list(all=True):
+        ports = c.attrs["NetworkSettings"]["Ports"]
+        if not ports:
+            continue
+
+        for container_port, bindings in ports.items():
+            if bindings:
+                for bind in bindings:
+                    host_port = bind.get("HostPort")
+                    if host_port:
+                        try:
+                            used_ports.add(int(host_port))
+                        except ValueError:
+                            pass
+
     for port in range(PORT_RANGE[0], PORT_RANGE[1]):
-        if f"{port}/tcp" not in used_ports:
+        if port not in used_ports:
             return port
+
     return None
+
 
 @app.get("/")
 def index():
