@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import docker
 import random
 
@@ -22,6 +22,10 @@ def get_free_port():
         if f"{port}/tcp" not in used_ports:
             return port
     return None
+
+@app.get("/")
+def index():
+    return render_template("index.html")
 
 @app.post("/create")
 def create_containers():
