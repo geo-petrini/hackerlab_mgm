@@ -1,0 +1,9 @@
+services:
+  hackerlab-manager:
+    build: .
+    container_name: hackerlab-manager
+    ports:
+      - "5000:5000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
