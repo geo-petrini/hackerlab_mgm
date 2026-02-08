@@ -1,0 +1,11 @@
+/* La colonna 'Azioni' conserva spazio sufficiente su tutte le righe */
+.col-actions {
+  width: 140px;              /* regola se vuoi più/meno spazio */
+  white-space: nowrap;       /* evita andare a capo */
+}
+
+/* Il bottone conserva la larghezza anche quando mostri spinner/testi diversi */
+.btn-delete {
+  min-width: 100px;          /* abbastanza per "Elimina" ed "Attendere..." */
+  text-align: right;         /* opzionale: se vuoi che testo/spinner siano a destra */
+}

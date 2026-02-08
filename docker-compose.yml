@@ -1,9 +1,13 @@
 services:
   hackerlab-manager:
     build: .
+    image: hackerlab-manager:latest
     container_name: hackerlab-manager
     ports:
       - "20000:5000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    environment:
+      - PORT_MIN=10000
+      - PORT_MAX=10024
