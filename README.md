@@ -72,3 +72,6 @@ PUBLIC_HOST=localhost
 # Flask debug
 FLASK_DEBUG=true
 ```
+
+### Logo
+Image generated via MS Copilot
